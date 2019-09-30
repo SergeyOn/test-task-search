@@ -1,0 +1,21 @@
+img{
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.grid__item {
+    width: 100%;
+    height: 40vh;
+    position: relative;
+}
+
+.form-control:focus {
+    border-color: #7978be;
+    box-shadow: 0 0 0 0.2rem rgba(46, 57, 155, 0.25);
+} 
