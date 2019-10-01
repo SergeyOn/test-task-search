@@ -7,13 +7,26 @@ import {
   CHANGE_COLUMNS_COUNT
 } from "../types/types";
 
-export const searchImages = query => {
-  if (!query) return;
+export const searchImages = (query, cancel) => {
+  console.log(cancel);
+
+
+
+  if (!query) return dispatch => {};
   return dispatch => {
     dispatch(searchStarted());
+
+    if ( cancel.token ) {
+      cancel.token.cancel();
+    }
+
+    cancel.token = axios.CancelToken.source();
+
     axios
       .get(
-        `https://cors-anywhere.herokuapp.com/https://www.google.com/search?q=${query}&source=lnms&tbm=isch`
+        `https://cors-anywhere.herokuapp.com/https://www.google.com/search?q=${query}&source=lnms&tbm=isch`, {
+          cancelToken: cancel.token.token
+        }
       )
       .then(data => data.data)
       .then(data => {
@@ -30,7 +43,7 @@ export const searchImages = query => {
         dispatch(searchSuccess(newData));
       })
       .catch(err => {
-        dispatch(searchFail(err.message));
+        // dispatch(searchFail(err.message));
       });
   };
 };

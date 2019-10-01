@@ -1,21 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { searchImages } from "../../actions/actions";
 import { debounce } from "throttle-debounce";
 
 const Search = props => {
-  const { searchImages, loading } = props;
+  const { searchImages} = props;
 
-  const test = debounce(500, value => {
-    if (loading) return;
-    searchImages(value);
+  const [cancel, cancelToken] = useState({token:''});
+
+  const fireRequest = debounce(300, value => {
+    searchImages(value, cancel);
   });
 
   return (
     <input
       type="text"
       className="form-control"
-      onChange={e => test(e.target.value)}
+      onChange={e => searchImages(e.target.value, cancel)}
       placeholder="type to find"
     />
   );

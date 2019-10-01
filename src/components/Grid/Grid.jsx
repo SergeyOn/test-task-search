@@ -23,7 +23,7 @@ const Grid = props => {
   return (
     <React.Fragment>
       {spin}
-      <StackGrid columnWidth={width}>{pictures.map(renderPictures)}</StackGrid>
+      <StackGrid columnWidth={width}>{pictures.length ? pictures.map(renderPictures) : (<div>No results found</div>)}</StackGrid>
     </React.Fragment>
   );
 };
