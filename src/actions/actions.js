@@ -8,10 +8,6 @@ import {
 } from "../types/types";
 
 export const searchImages = (query, cancel) => {
-  console.log(cancel);
-
-
-
   if (!query) return dispatch => {};
   return dispatch => {
     dispatch(searchStarted());
